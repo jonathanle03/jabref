@@ -249,4 +249,88 @@ class HayagrivaYamlExporterTest {
 
         assertEquals(expected, Files.readAllLines(file));
     }
+
+    @Test
+    final void exportsDoiUnderSerialNumber(@TempDir Path tempFile) throws IOException, SaveException, ParserConfigurationException, TransformerException {
+        BibEntry entry = new BibEntry(StandardEntryType.Article)
+                .withCitationKey("test")
+                .withField(StandardField.AUTHOR, "Test Author")
+                .withField(StandardField.TITLE, "Test Title")
+                .withField(StandardField.URL, "http://example.com")
+                .withField(StandardField.DATE, "2020-10-14")
+                .withField(StandardField.DOI, "10.1109/EDOC.2018.00030");
+
+        Path file = tempFile.resolve("RandomFileName");
+        Files.createFile(file);
+        hayagrivaYamlExporter.export(databaseContext, file, List.of(entry));
+
+        List<String> expected = List.of(
+                "test:",
+                "  type: article",
+                "  title: \"Test Title\"",
+                "  author:",
+                "    - Author, Test",
+                "  date: 2020-10-14",
+                "  url: http://example.com",
+                "  serial-number:",
+                "    doi: 10.1109/EDOC.2018.00030");
+
+        assertEquals(expected, Files.readAllLines(file));
+    }
+
+    @Test
+    final void exportsIsbnUnderSerialNumber(@TempDir Path tempFile) throws IOException, SaveException, ParserConfigurationException, TransformerException {
+        BibEntry entry = new BibEntry(StandardEntryType.Article)
+                .withCitationKey("test")
+                .withField(StandardField.AUTHOR, "Test Author")
+                .withField(StandardField.TITLE, "Test Title")
+                .withField(StandardField.URL, "http://example.com")
+                .withField(StandardField.DATE, "2020-10-14")
+                .withField(StandardField.ISBN, "978-3-16-148410-0");
+
+        Path file = tempFile.resolve("RandomFileName");
+        Files.createFile(file);
+        hayagrivaYamlExporter.export(databaseContext, file, List.of(entry));
+
+        List<String> expected = List.of(
+                "test:",
+                "  type: article",
+                "  title: \"Test Title\"",
+                "  author:",
+                "    - Author, Test",
+                "  date: 2020-10-14",
+                "  url: http://example.com",
+                "  serial-number:",
+                "    isbn: 978-3-16-148410-0");
+
+        assertEquals(expected, Files.readAllLines(file));
+    }
+
+    @Test
+    final void exportsIssnUnderSerialNumber(@TempDir Path tempFile) throws IOException, SaveException, ParserConfigurationException, TransformerException {
+        BibEntry entry = new BibEntry(StandardEntryType.Article)
+                .withCitationKey("test")
+                .withField(StandardField.AUTHOR, "Test Author")
+                .withField(StandardField.TITLE, "Test Title")
+                .withField(StandardField.URL, "http://example.com")
+                .withField(StandardField.DATE, "2020-10-14")
+                .withField(StandardField.ISSN, "0302-9743");
+
+        Path file = tempFile.resolve("RandomFileName");
+        Files.createFile(file);
+        hayagrivaYamlExporter.export(databaseContext, file, List.of(entry));
+
+        List<String> expected = List.of(
+                "test:",
+                "  type: article",
+                "  title: \"Test Title\"",
+                "  author:",
+                "    - Author, Test",
+                "  date: 2020-10-14",
+                "  url: http://example.com",
+                "  serial-number:",
+                "    issn: 0302-9743");
+
+        assertEquals(expected, Files.readAllLines(file));
+    }
 }
