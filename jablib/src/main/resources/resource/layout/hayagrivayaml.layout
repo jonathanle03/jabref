@@ -27,11 +27,9 @@
 \begin{edition}  edition: \edition\end{edition}
 \begin{pages}  page-range: \pages\end{pages}
 \begin{url}  url: \url\end{url}
-\begin{doi||isbn||issn||pmd||pmcid}  serial-number:\end{doi||isbn||issn||pmd||pmcid}
+\begin{doi||isbn||issn}  serial-number:\end{doi||isbn||issn}
 \begin{doi}    doi: \doi\end{doi}
 \begin{isbn}    isbn: \isbn\end{isbn}
 \begin{issn}    issn: \issn\end{issn}
-\begin{pmd}    pmd: \pmd\end{pmd}
-\begin{pmcid}    pmcid: \pmcid\end{pmcid}
 \begin{note}  note: \note\end{note}
 
